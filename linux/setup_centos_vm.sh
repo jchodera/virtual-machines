@@ -11,15 +11,17 @@ sudo rpm -i --quiet epel-release-6-8.noarch.rpm
 # Install things needed for virtualbox guest additions.
 echo "********** Removing old kernel package..."
 #sudo yum remove -y --quiet kernel-2.6.32-431.el6.x86_64
-sudo yum remove -y --quiet kernel kernel-headers kernel-devl
+sudo yum remove -y --quiet kernel kernel-headers kernel-devel
 echo "********** Installing kernel headers and dkms for virtualbox guest additions..."
 #sudo yum install -y --quiet kernel-devel dkms
 
 # Install things needed to add virtualbox guest plugins.
-sudo yum -y --quiet --enablerepo rpmforge install dkms
-sudo yum -y --quiet groupinstall "Development Tools"
+#sudo yum -y --quiet --enablerepo rpmforge install dkms
+#sudo yum -y --quiet groupinstall "Development Tools"
 #sudo yum -y --quiet install kernel-devel
-sudo yum -y --quiet install kernel-devel-2.6.32-504.el6.x86_64
+#sudo yum -y --quiet install kernel-devel-2.6.32-504.el6.x86_64
+sudo yum -y --quietinstall dkms
+sudo yum -y --quiet --enablerepo centosplus install kernel-devel-2.6.32-504.el6.centos.plus.x86_64.rpm
 
 echo "********** Updating yum..."
 sudo yum update -y --quiet
