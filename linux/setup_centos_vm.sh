@@ -118,3 +118,8 @@ echo "" >> $HOME/.bashrc
 echo "********** Installing packages via pip..."
 $HOME/miniconda/bin/pip install --quiet sphinxcontrib-bibtex
 
+# Install things needed to add virtualbox guest plugins.
+sudo yum -y --quiet --enablerepo rpmforge install dkms
+sudo yum -y --quiet groupinstall "Development Tools"
+sudo yum -y --quiet install kernel-devel
+
