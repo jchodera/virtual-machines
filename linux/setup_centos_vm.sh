@@ -15,17 +15,17 @@ sudo yum remove -y --quiet kernel kernel-headers kernel-devel
 echo "********** Installing kernel headers and dkms for virtualbox guest additions..."
 #sudo yum install -y --quiet kernel-devel dkms
 
+echo "********** Updating yum..."
+sudo yum update -y --quiet
+
 # Install things needed to add virtualbox guest plugins.
 #sudo yum -y --quiet --enablerepo rpmforge install dkms
 #sudo yum -y --quiet groupinstall "Development Tools"
 #sudo yum -y --quiet install kernel-devel
 #sudo yum -y --quiet install kernel-devel-2.6.32-504.el6.x86_64
-sudo yum -y --quietinstall dkms
-sudo yum -y --quiet --enablerepo centosplus install kernel-devel-2.6.32-504.el6.centos.plus.x86_64.rpm
-
-echo "********** Updating yum..."
-sudo yum update -y --quiet
-
+sudo yum remove -y --quiet kernel kernel-headers kernel-devel
+sudo yum -y --quietinstall dkms make gcc kernel-devel kernel-headers
+#sudo yum -y --quiet --enablerepo centosplus install kernel-devel-2.6.32-504.el6.centos.plus.x86_64.rpm
 
 # DEBUG
 exit 0
