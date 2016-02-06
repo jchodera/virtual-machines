@@ -9,10 +9,11 @@ wget --quiet http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch
 sudo rpm -i --quiet epel-release-6-8.noarch.rpm
 
 # Install things needed for virtualbox guest additions.
-echo "********** Removing old kernel package..."
+sudo yum install -y dkms
+#echo "********** Removing old kernel package..."
 #sudo yum remove -y --quiet kernel-2.6.32-431.el6.x86_64
-sudo yum remove -y --quiet kernel kernel-headers kernel-devel
-echo "********** Installing kernel headers and dkms for virtualbox guest additions..."
+#sudo yum remove -y --quiet kernel kernel-headers kernel-devel
+#echo "********** Installing kernel headers and dkms for virtualbox guest additions..."
 #sudo yum install -y --quiet kernel-devel dkms
 
 echo "********** Updating yum..."
@@ -23,13 +24,10 @@ sudo yum update -y --quiet
 #sudo yum -y --quiet groupinstall "Development Tools"
 #sudo yum -y --quiet install kernel-devel
 #sudo yum -y --quiet install kernel-devel-2.6.32-504.el6.x86_64
-sudo yum -y --quiet install dkms kernel-headers
+#sudo yum -y --quiet install dkms kernel-headers
 #wget http://vault.centos.org/6.6/centosplus/x86_64/Packages/kernel-devel-2.6.32-504.el6.centos.plus.x86_64.rpm
 #sudo rpm -i --quiet kernel-devel-2.6.32-504.el6.centos.plus.x86_64.rpm
 #sudo yum -y --quiet --enablerepo centosplus install kernel-devel-2.6.32-504.el6.centos.plus.x86_64.rpm
-
-# DEBUG
-exit 0
 
 # Several of these come from the EPEL repo
 echo "********** Installing lots of packages via yum..."
