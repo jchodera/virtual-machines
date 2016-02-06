@@ -11,12 +11,22 @@ sudo rpm -i --quiet epel-release-6-8.noarch.rpm
 # Install things needed for virtualbox guest additions.
 echo "********** Removing old kernel package..."
 #sudo yum remove -y --quiet kernel-2.6.32-431.el6.x86_64
-sudo yum remove -y --quiet kernel
+sudo yum remove -y --quiet kernel kernel-headers kernel-devl
 echo "********** Installing kernel headers and dkms for virtualbox guest additions..."
-sudo yum install -y --quiet kernel-devel dkms
+#sudo yum install -y --quiet kernel-devel dkms
+
+# Install things needed to add virtualbox guest plugins.
+sudo yum -y --quiet --enablerepo rpmforge install dkms
+sudo yum -y --quiet groupinstall "Development Tools"
+#sudo yum -y --quiet install kernel-devel
+sudo yum -y --quiet install kernel-devel-2.6.32-504.el6.x86_64
 
 echo "********** Updating yum..."
 sudo yum update -y --quiet
+
+
+# DEBUG
+exit 0
 
 # Several of these come from the EPEL repo
 echo "********** Installing lots of packages via yum..."
@@ -119,9 +129,4 @@ echo "" >> $HOME/.bashrc
 # Install additional packages via pip.
 echo "********** Installing packages via pip..."
 $HOME/miniconda/bin/pip install --quiet sphinxcontrib-bibtex sphinxcontrib-lunrsearch sphinxcontrib-autodoc_doxygen
-
-# Install things needed to add virtualbox guest plugins.
-sudo yum -y --quiet --enablerepo rpmforge install dkms
-sudo yum -y --quiet groupinstall "Development Tools"
-sudo yum -y --quiet install kernel-devel
 
