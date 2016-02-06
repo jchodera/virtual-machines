@@ -23,10 +23,9 @@ sudo yum update -y --quiet
 #sudo yum -y --quiet groupinstall "Development Tools"
 #sudo yum -y --quiet install kernel-devel
 #sudo yum -y --quiet install kernel-devel-2.6.32-504.el6.x86_64
-sudo yum remove -y --quiet kernel kernel-headers kernel-devel
-sudo yum -y --quietinstall dkms
-wget http://vault.centos.org/6.6/centosplus/x86_64/Packages/kernel-devel-2.6.32-504.el6.centos.plus.x86_64.rpm
-sudo rpm -i --quiet kernel-devel-2.6.32-504.el6.centos.plus.x86_64.rpm
+sudo yum -y --quiet install dkms kernel-headers
+#wget http://vault.centos.org/6.6/centosplus/x86_64/Packages/kernel-devel-2.6.32-504.el6.centos.plus.x86_64.rpm
+#sudo rpm -i --quiet kernel-devel-2.6.32-504.el6.centos.plus.x86_64.rpm
 #sudo yum -y --quiet --enablerepo centosplus install kernel-devel-2.6.32-504.el6.centos.plus.x86_64.rpm
 
 # DEBUG
