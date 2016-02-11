@@ -36,6 +36,25 @@ sudo yum install -y --quiet tar clang cmake graphviz perl flex bison rpm-build t
 # Install GLUT for OpenGL
 sudo yum install -y --quiet freeglut-devel
 
+# Install AMD APP SDK 3.0
+echo "********** Installing AMD APP SDK 3.0..."
+APPSDKFILE="AMD-APP-SDKInstaller-v3.0.130.135-GA-linux64.tar.bz2"
+mkdir ~/Software/AMD
+cd ~/Software/AMD
+# Copy the tarball $APPSDKFILE to the directory containing VagrantFile, which will be shared on the guest as /vagrant/
+sudo yum install -y --quiet redhat-lsb
+URL="http://jenkins.choderalab.org/userContent/$APPSDKFILE"
+#echo "Retrieving AMD APP SDK from $URL..."
+#wget --quiet $URL
+cp /vagrant/$APPSDKFILE .
+echo "Unpacking $APPSDKFILE..."
+tar -jxvf  $APPSDKFILE
+echo "Installing $APPSDKFILE..."
+sudo ./AMD-APP-SDK-v3.0.130.135-GA-linux64.sh -- -s -a yes
+export OPENCL_HOME=/opt/AMDAPPSDK-3.0
+export OPENCL_LIBPATH=/opt/AMDAPPSDK-3.0/lib/x86_64
+
+# Doxygen
 echo "********** Compiling recent doxygen..."
 cd ~/Software
 wget http://ftp.stack.nl/pub/users/dimitri/doxygen-1.8.8.src.tar.gz
@@ -103,23 +122,6 @@ echo "********** Installing conda/binstar channels and packages..."
 export PATH=$HOME/miniconda/bin:$PATH
 conda config --add channels omnia
 conda install --yes --quiet fftw3f jinja2 swig sphinx conda-build cmake anaconda-client pip
-
-# Install AMD APP SDK
-echo "********** Installing AMD APP SDK 3.0..."
-APPSDKFILE="AMD-APP-SDKInstaller-v3.0.130.135-GA-linux64.tar.bz2"
-mkdir ~/Software/AMD
-cd ~/Software/AMD
-# Copy the tarball $APPSDKFILE to the directory containing VagrantFile, which will be shared on the guest as /vagrant/
-sudo yum install -y --quiet redhat-lsb
-URL="http://jenkins.choderalab.org/userContent/$APPSDKFILE"
-echo "Retrieving AMD APP SDK from $URL..."
-wget --quiet $URL
-echo "Unpacking $APPSDKFILE..."
-tar -jxvf  $APPSDKFILE
-echo "Installing $APPSDKFILE..."
-sudo ./AMD-APP-SDK-v3.0.130.135-GA-linux64.sh -- -s -a yes
-export OPENCL_HOME=/opt/AMDAPPSDK-3.0
-export OPENCL_LIBPATH=/opt/AMDAPPSDK-3.0/lib/x86_64
 
 # Add conda to the path.
 echo "********** Adding paths"
